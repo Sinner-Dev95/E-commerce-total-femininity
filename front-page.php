@@ -23,7 +23,17 @@ $hero_title_line_1 = get_theme_mod('hero_title_1', 'PRIMAVERA');
 $hero_title_line_2 = get_theme_mod('hero_title_2', "L'essenza femminile veste Total Femininity");
 
 $hero_cta_text = get_theme_mod('hero_cta_text', 'SCOPRI LA COLLEZIONE');
-$hero_cta_link = get_theme_mod('hero_cta_link', get_permalink(wc_get_page_id('shop')));
+
+// Shop URL sicura — funziona anche se WooCommerce è disattivato
+$shop_url = home_url('/shop/');
+if (function_exists('wc_get_page_id')) {
+    $shop_id = wc_get_page_id('shop');
+    if ($shop_id && $shop_id > 0) {
+        $shop_url = get_permalink($shop_id);
+    }
+}
+
+$hero_cta_link = get_theme_mod('hero_cta_link', $shop_url);
 
 get_header();
 ?>
@@ -79,7 +89,7 @@ get_header();
                     </button>
                 <?php endif; ?>
 
-                <div class="hero-cta" data-usal="fade-u duration-800 once delay-600">
+                <div class="hero-cta" data-usal="fade-u duration-950 once delay-600">
                     <a
                         href="<?php echo esc_url($hero_cta_link); ?>"
                         class="btn btn-light"
@@ -131,10 +141,10 @@ $collection_ai_image = get_theme_mod('collection_ai_image', 0);
 $collection_pe_image = get_theme_mod('collection_pe_image', 0);
 
 $ai_link = get_term_link('autunno-inverno', 'product_cat');
-$ai_link = get_theme_mod('collection_ai_link') ?: (!is_wp_error($ai_link) ? $ai_link : get_permalink(wc_get_page_id('shop')));
+$ai_link = get_theme_mod('collection_ai_link') ?: (!is_wp_error($ai_link) ? $ai_link : $shop_url);
 
 $pe_link = get_term_link('primavera-estate', 'product_cat');
-$pe_link = get_theme_mod('collection_pe_link') ?: (!is_wp_error($pe_link) ? $pe_link : get_permalink(wc_get_page_id('shop')));
+$pe_link = get_theme_mod('collection_pe_link') ?: (!is_wp_error($pe_link) ? $pe_link : $shop_url);
 
 $featured = get_theme_mod('featured_collection', 'pe');
 
@@ -156,7 +166,7 @@ $collections = [
 $secondary = ($featured === 'pe') ? 'ai' : 'pe';
 ?>
 
-<section class="collections-grid" data-usal="fade-l duration-1200 once threshold-10">
+<section class="collections-grid" data-usal="fade-l duration-1450 once threshold-10">
     <div class="collections-wrapper">
         <?php foreach ([$secondary => 'small', $featured => 'large'] as $key => $size):
             $col = $collections[$key];
@@ -179,7 +189,7 @@ $secondary = ($featured === 'pe') ? 'ai' : 'pe';
 <section class="curated-selection-section" data-usal="fade-u duration-1000 once threshold-10">
     <header class="curated-header">
         <h2 class="curated-title">Curated Selection</h2>
-        <a href="<?php echo esc_url(get_permalink(wc_get_page_id('shop'))); ?>"
+        <a href="<?php echo esc_url($shop_url); ?>"
             class="btn btn-dark curated-view-all"
             aria-label="Vedi tutti i prodotti nello shop">
             Vedi tutto →
@@ -292,7 +302,7 @@ $testimonials = [
 ];
 ?>
 
-<section class="home-testimonials" data-usal="fade-u duration-1000 once threshold-20"
+<section class="home-testimonials" data-usal="fade-u duration-1000 once threshold-14"
     role="region"
     aria-label="Dicono di noi"
     itemscope

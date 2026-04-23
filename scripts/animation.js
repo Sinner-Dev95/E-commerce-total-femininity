@@ -17,12 +17,12 @@ document.addEventListener("DOMContentLoaded", function () {
     const isDesktop = window.matchMedia("(min-width: 769px)").matches;
 
     if (!isDesktop) {
-      console.log("[Lenis] Mobile detected - using native scroll");
+      if (window.TF_DEBUG) console.log("[Lenis] Mobile detected - using native scroll");
       return;
     }
 
     if (typeof Lenis === "undefined") {
-      console.error("[Lenis] Lenis library not loaded");
+      if (window.TF_DEBUG) console.error("[Lenis] Lenis library not loaded");
       return;
     }
 
@@ -39,7 +39,7 @@ const lenis = new Lenis({
     }
     requestAnimationFrame(raf);
 
-    console.log("[Lenis] Smooth scroll initialized on desktop");
+    if (window.TF_DEBUG) console.log("[Lenis] Smooth scroll initialized on desktop");
   }
 
   initLenis();
@@ -61,7 +61,7 @@ const lenis = new Lenis({
       
       // Limite massimo: 100 tentativi = 5 secondi (100 * 50ms)
       if (initUSAL.retryCount > 100) {
-        console.error('[USAL] Timeout: USAL non caricato dopo 100 tentativi');
+        if (window.TF_DEBUG) console.error('[USAL] Timeout: USAL non caricato dopo 100 tentativi');
         return;
       }
       
@@ -71,14 +71,14 @@ const lenis = new Lenis({
 
     window.USAL.config({
       defaults: {
-        duration: 1000,
-        easing: 'ease-out',
-        threshold: 10
+        duration: 1350,
+        easing: 'cubic-bezier(0.22, 1, 0.36, 1)',
+        threshold: 8
       },
       once: true  // ← top-level, non dentro defaults
     });
 
-    console.log("[USAL] Initialized");
+    if (window.TF_DEBUG) console.log("[USAL] Initialized");
   }
 
   initUSAL();
