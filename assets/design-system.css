@@ -1,0 +1,162 @@
+/* ============================================================
+   NOTE: I font sono caricati via Google Fonts CDN in functions.php
+   Pacifico: https://fonts.googleapis.com/css2?family=Pacifico
+   ============================================================ */
+
+:root {
+    /* --- 1. PALETTE COLORI (Vogue 2026 Trend) --- */
+    /* Sfondi */
+    --colore-sfondo: #FAFAF8;           /* Avorio - Collections, card prodotti */
+    --colore-sfondo-caldo: #EDE8DF;     /* Crema sabbia - About, Testimonials */
+    --colore-sfondo-scuro: #0F0F0F;     /* Inchiostro - Hero/Payoff, Curated Selection, Footer */
+    
+    /* Testi */
+    --colore-testo-principale: #0F0F0F; /* Testo su sfondi chiari */
+    --colore-testo-chiaro: #FAFAF8;     /* Testo su sfondi scuri */
+    --colore-testo-muted: #6B6B6B;      /* Meta, prezzi secondari, label */
+    --colore-testo-secondario: #6B6B6B; /* Alias di --colore-testo-muted - showroom, location */
+    
+    /* Accento unico firma */
+    --colore-accento: #8fcb9b;          /* Corallo bruciato - Pacifico, hover link, prezzi scontati */
+    
+    /* Bordi & UI */
+    --colore-bordo: #E2DDD6;            /* Bordi card, separatori - tono caldo */
+    
+    /* E-commerce */
+    --colore-prezzo: #0F0F0F;           /* Prezzo standard */
+    --colore-saldo: #D94F3D;            /* Prezzo scontato - riusa accento */
+    --colore-disponibile: #2D6A4F;      /* Verde scuro - in stock */
+    --colore-esaurito: #6B6B6B;         /* Grigio - out of stock */
+
+    /* --- 2. TIPOGRAFIA - Scala coerente a 7 livelli ---
+    
+       REGOLA: ogni token ha UN solo ruolo semantico.
+       Non usare --testo-h2 per il body e viceversa.
+       
+       --testo-xs   → label, badge, meta info
+       --testo-sm   → UI, menu, caption
+       --testo-base → corpo testo, paragrafi
+       --testo-md   → sottotitoli, quote autore, intro
+       --testo-lg   → H3, titoli card, titoli componenti
+       --testo-h2   → H2 di ogni sezione (Collections, About, Testimonials...)
+       --testo-h1   → Solo hero headline
+       
+       TOKEN RIMOSSI (erano orfani/sovrapposti):
+       --testo-payoff    → sostituito da --testo-md per il corpo
+       --testo-intermedio → sostituito da --testo-h2 con font-size locale se serve
+    ============================================================ */
+    
+    --font-titoli: 'Syne', sans-serif;
+    --font-corpo: 'Syne', sans-serif;
+    --font-script: 'Pacifico', cursive;
+
+    --testo-xs:   0.75rem;                          /* 12px  - fisso */
+    --testo-sm:   0.875rem;                         /* 14px  - fisso */
+    --testo-base: clamp(1rem, 2vw, 1.125rem);       /* 16→18px */
+    --testo-md:   clamp(1.125rem, 2.5vw, 1.375rem); /* 18→22px */
+    --testo-lg:   clamp(1.375rem, 3vw, 1.75rem);    /* 22→28px */
+   --testo-h1:   clamp(2.75rem, 8vw, 5.61rem);
+--testo-h2:   clamp(2rem, 4.5vw, 2.75rem);
+
+    /* Line Height */
+    --interlinea-stretta: 1.2;   /* Titoli display */
+    --interlinea-media:   1.4;   /* Titoli sezione H2 */
+    --interlinea-base:    1.6;   /* Corpo testo */
+
+    /* --- 3. SPAZIATURE (Rhythm & Flow) --- */
+    /* Basato su griglia 4px/8px */
+    --spazio-xs: 0.5rem;                /* 8px  (Micro) */
+    --spazio-s: 1rem;                   /* 16px (Interno componenti) */
+    --spazio-m: 2rem;                   /* 32px (Separazione standard) */
+    --spazio-l: 4rem;                   /* 64px (Separazione macro) */
+    --spazio-xl: 6rem;                  /* 96px (Separazione extra-large) */
+    --spazio-xxl: 8rem;                 /* 128px (Separazione XXL) */
+    
+    /* Spaziatura Sezioni Fluida */
+    --spazio-sezione: clamp(4rem, 10vw, 8rem); /* Da 64px a 128px */
+    --container-width: 1290px;          /* Max width per schermi grandi */
+    --padding-laterale: clamp(1.25rem, 5vw, 3rem); /* Safe area */
+
+    /* --- 4. COMPONENTI UI (Brutalism) --- */
+    --raggio-bordo: 0px;                /* Sharp edges (Stile Crap Eyewear) */
+    --bordo-sottile: 1px solid var(--colore-bordo);
+    --bordo-spesso: 2px solid var(--colore-sfondo-scuro);
+    
+    /* Transizioni */
+    --transizione-base: 0.2s ease-out;
+}
+
+/* Smooth scroll nativo */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--colore-sfondo-caldo);
+}
+
+/*====== RESET ======*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    touch-action: manipulation;
+}
+/* HEADER FISSO/STICKY - attivo bianco */
+[data-header*=type-1] .ct-header [data-sticky*=yes] [data-row*=middle] .current-menu-item .ct-menu-link,
+[data-header*=type-1] .ct-header [data-sticky*=yes] [data-row*=middle] .current_page_item .ct-menu-link {
+    color: var(--colore-bordo) !important;
+    border-color: transparent !important;
+}
+
+[data-header*=type-1] .ct-header [data-sticky*=yes] [data-row*=middle] .current-menu-item .ct-menu-link:hover,
+[data-header*=type-1] .ct-header [data-sticky*=yes] [data-row*=middle] .current_page_item .ct-menu-link:hover {
+    color: var(--colore-accento) !important;
+    border-color: transparent !important;
+}
+
+/* HEADER TRASPARENTE - attivo nero */
+.ct-header [data-transparent-row="yes"] .current-menu-item .ct-menu-link,
+.ct-header [data-transparent-row="yes"] .current_page_item .ct-menu-link {
+    color: var(--colore-sfondo-scuro) !important;
+    border-color: transparent !important;
+}
+
+.ct-header [data-transparent-row="yes"] .current-menu-item .ct-menu-link:hover,
+.ct-header [data-transparent-row="yes"] .current_page_item .ct-menu-link:hover {
+    color: var(--colore-accento) !important;
+    border-color: transparent !important;
+}
+
+/* ============================================================
+   UTILITY — Bottone base
+   Usare sempre in combinazione con una variante colore:
+   .btn-light / .btn-dark / .btn-accent
+   ============================================================ */
+
+.btn {
+    display: inline-block;
+    padding: 0.85rem 2rem;
+    font-family: var(--font-corpo);
+    font-size: var(--testo-sm);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-decoration: none;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: all var(--transizione-base);
+    line-height: 1;
+    white-space: nowrap;
+}
+
+.btn:active {
+    transform: scale(0.98);
+}
+
+@media (min-width: 768px) {
+    .btn {
+        font-size: var(--testo-base);
+        padding: 1rem 2.5rem;
+    }
+}

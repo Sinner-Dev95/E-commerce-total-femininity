@@ -1,0 +1,62 @@
+/* ============================================================
+   WOOCOMMERCE CARD HOVER EFFECTS - Editorial Premium Style
+   Micro-animazioni sottili, coerenti con il brand Total Femininity
+   
+   Design System Reference:
+   - Stile: Elegante, Raffinato, Editoriale
+   - Palette: Monocromatica premium (nero/bianco con accenti lilla)
+   - Approccio: Sottile, non invasivo, minimalista
+   
+   NOTA: Ombra gestita dal backend Blocksy
+   ============================================================ */
+
+/* ============================================================
+   CARD PRINCIPALE - Transizione fluida
+   ============================================================ */
+
+.product {
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                border-color 0.3s ease;
+    border: 1px solid transparent;
+}
+
+/* Hover: Sollevamento editoriale (sottile, non invasivo) */
+.product:hover {
+    transform: translateY(-4px);
+    border-color: var(--colore-bordo);
+}
+
+/* ============================================================
+   TITOLO - Colore lilla (coerenza brand)
+   ============================================================ */
+
+.woocommerce-loop-product__title a {
+    transition: color 0.3s ease;
+}
+
+.product:hover .woocommerce-loop-product__title a {
+    color: var(--colore-accento);
+}
+
+/* ============================================================
+   MOBILE - Disabilita hover effects
+   ============================================================ */
+
+@media (hover: none) and (pointer: coarse) {
+    .product {
+        transition: none;
+    }
+    
+    .product:hover {
+        transform: none;
+        border-color: transparent;
+    }
+    
+    .woocommerce-loop-product__title a {
+        transition: none;
+    }
+    
+    .product:hover .woocommerce-loop-product__title a {
+        color: inherit;
+    }
+}
