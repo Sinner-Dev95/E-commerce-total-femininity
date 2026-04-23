@@ -343,11 +343,11 @@ $testimonials = [
         <div class="testimonials-dots" aria-label="Navigazione testimonianze">
             <?php foreach ($testimonials as $index => $testimonial): ?>
                 <button
-                    class="testimonial-dot <?php echo $index === 0 ? 'active' : ''; ?>"
+                    class="testimonial-dot <?php echo esc_attr( $index === 0 ? 'active' : '' ); ?>"
                     tabindex="0"
-                    aria-label="Vai alla testimonianza <?php echo $index + 1; ?>"
+                    aria-label="Vai alla testimonianza <?php echo esc_attr( $index + 1 ); ?>"
                     aria-current="<?php echo $index === 0 ? 'true' : 'false'; ?>"
-                    data-slide="<?php echo $index; ?>">
+                    data-slide="<?php echo esc_attr( $index ); ?>">
                 </button>
             <?php endforeach; ?>
         </div>

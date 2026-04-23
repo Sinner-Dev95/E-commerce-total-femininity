@@ -35,7 +35,7 @@ if ( ! $eventi_query->have_posts() ) {
             $event_luogo = get_post_meta( get_the_ID(), 'evento_luogo', true );
             $delay       = $card_index * 200;
         ?>
-        <article class="evento-card" itemscope itemtype="https://schema.org/Event" data-usal="fade-u duration-1000 once delay-<?php echo $delay; ?> threshold-10">
+        <article class="evento-card" itemscope itemtype="https://schema.org/Event" data-usal="fade-u duration-1000 once delay-<?php echo esc_attr( $delay ); ?> threshold-10">
             <a href="<?php the_permalink(); ?>" class="evento-card-media-link" tabindex="-1" aria-hidden="true">
                 <div class="evento-card-media">
                     <?php if ( $thumb_url ) : ?>
