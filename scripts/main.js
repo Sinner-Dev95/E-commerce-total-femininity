@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const dots = document.querySelectorAll('.testimonial-dot');
     const items = document.querySelectorAll('.testimonial-item');
 
-    if (!carousel || !track || dots.length === 0) return;
+    if (carousel && track && dots.length > 0) {
 
     const totalSlides = items.length;
     const clonesCount = 3;
@@ -197,6 +197,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }, { passive: true });
 
     startAutoScroll();
+
+    } // fine if testimonials
 
     // ============================================================
     // CURATED SELECTION - MOBILE CAROUSEL DOTS
