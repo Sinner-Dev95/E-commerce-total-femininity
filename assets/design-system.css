@@ -145,18 +145,82 @@ body {
     text-decoration: none;
     border: 2px solid transparent;
     cursor: pointer;
-    transition: all var(--transizione-base);
+    transition:
+        transform var(--transizione-base),
+        box-shadow var(--transizione-base),
+        background-color var(--transizione-base),
+        color var(--transizione-base),
+        border-color var(--transizione-base);
     line-height: 1;
     white-space: nowrap;
+    will-change: transform;
+    position: relative;
+    overflow: hidden;
+    z-index: 0;
 }
 
 .btn:active {
-    transform: scale(0.98);
+    transform: translateY(0) scale(0.98);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
 @media (min-width: 768px) {
     .btn {
         font-size: var(--testo-base);
         padding: 1rem 2.5rem;
+    }
+}
+
+/* ============================================================
+   MICROINTERAZIONI BOTTONI — Fill dal basso + Lift
+   ============================================================ */
+
+/* Fill dal basso */
+.btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    transform: translateY(100%);
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    z-index: -1;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.btn:hover::before {
+    transform: translateY(0);
+}
+
+.btn:focus-visible {
+    outline: 2px solid var(--colore-accento);
+    outline-offset: 3px;
+}
+
+/* Colore fill per variante */
+.btn-light::before  { background: var(--colore-bordo); }
+.btn-dark::before   { background: var(--colore-accento); }
+.btn-accent::before { background: var(--colore-bordo); }
+
+/* Utility freccia opzionale — aggiunge nudge alla freccia in hover */
+.btn--arrow .btn__arrow {
+    display: inline-block;
+    transition: transform var(--transizione-base);
+}
+
+.btn--arrow:hover .btn__arrow {
+    transform: translateX(3px);
+}
+
+/* Accessibilità — rispetta preferenze utente */
+@media (prefers-reduced-motion: reduce) {
+    .btn,
+    .btn::before,
+    .btn--arrow .btn__arrow {
+        transition: none;
+        transform: none;
+        will-change: auto;
     }
 }

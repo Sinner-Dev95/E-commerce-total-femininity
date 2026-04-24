@@ -169,7 +169,7 @@ $collections = [
 $secondary = ($featured === 'pe') ? 'ai' : 'pe';
 ?>
 
-<?php get_template_part('template-parts/usp-bar'); ?>
+
 
 <section class="collections-grid" data-usal="fade-l duration-1450 once threshold-10">
     <div class="collections-wrapper">
@@ -206,6 +206,8 @@ $secondary = ($featured === 'pe') ? 'ai' : 'pe';
         <?php echo do_shortcode('[products limit="9" columns="3" visibility="featured"]'); ?>
     </div>
 </section>
+
+<?php get_template_part('template-parts/usp-bar'); ?>
 
 <?php get_template_part('template-parts/sezione-eventi'); ?>
 
