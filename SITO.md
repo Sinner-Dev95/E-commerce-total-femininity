@@ -1,379 +1,189 @@
-# Documentazione del Sito
+# Total Femininity — Documentazione Brand & Design
 
-## Indice
+## Brand
 
-- [Identità del Brand](#identità-del-brand)
-- [Design System](#design-system)
-- [Linee Guida Immagini](#linee-guida-immagini)
-- [Stati Interattivi](#stati-interattivi)
-- [Architettura delle Pagine](#architettura-delle-pagine)
-
----
-
-## Identità del Brand
-
-### Informazioni Base
-- **Nome Brand:** Total Femininity
+- **Nome:** Total Femininity
 - **Slogan:** Perché lo stile non è quello che indossi. È quello che sei già.
-- **Missione:** Valorizzare il mondo femminile attraverso capi pensati per accompagnare in ogni occasione
-- **Storia:** Nasce a Torino nel 2026, da due sorelle con una visione: celebrare la femminilità
+- **Nasce:** Torino, 2026 — da due sorelle con una visione
+- **Missione:** Valorizzare il mondo femminile attraverso capi pensati per ogni occasione
 
-### Target Audience
-- **Fascia d'età:** 25-45 anni
+### Target
+- **Fascia:** 25-45 anni
 - **Stile:** Elegante, Raffinato, Editoriale
 - **Interessi:** Moda sostenibile, Design contemporaneo, Lifestyle premium
-- **Livello economico:** Premium
+- **Posizionamento:** Premium
 
-### Personalità del Brand
-- **3 Aggettivi chiave:**
-  1. Femminile
-  2. Elegante
-  3. Autentico
+### Personalità
+1. **Femminile** — celebra la donna
+2. **Elegante** — mai gridato, sempre curato
+3. **Autentico** — vera, non filtrata
 
 ---
 
 ## Design System
 
-### 1. Palette Colori (Monocromatico Premium)
+### Palette Colori
 
-```css
-/* === COLORI === */
-:root {
-    /* Primari */
-    --colore-sfondo: #FDFDFD;           /* Bianco carta premium */
-    --colore-testo: #111111;            /* Nero carbone */
-    --colore-testo-mute: #666666;       /* Per descrizioni e info secondarie */
-    --colore-bordo: #E5E5E5;            /* Linee sottili editoriali */
-    
-    /* Accenti */
-    --colore-accento: #111111;          /* Coerenza totale */
-    --colore-errore: #BC2525;           /* Unico tocco di colore per errori/saldi */
-    --colore-lilla: #E6E0F8;            /* Lilla/Lavanda per sezioni */
-    
-    /* Stati E-commerce (DA DEFINIRE) */
-    --colore-prezzo: #111111;           /* Prezzo standard */
-    --colore-prezzo-scontato: #BC2525;  /* Prezzo scontato */
-    --colore-disponibile: #4CAF50;      /* Verde per in-stock */
-    --colore-esaurito: #999999;         /* Grigio per out-of-stock */
-    
-    /* Grigi (DA DEFINIRE - necessari?) */
-    /* --grigio-50: #F9F9F9; */
-    /* --grigio-100: #F0F0F0; */
-    /* --grigio-200: #E5E5E5; */
-    /* --grigio-300: #CCCCCC; */
-}
-```
+Tono caldo con accento verde menta. Fonte: `assets/design-system.css`
 
-**Note:**
-- Palette monocromatica = look luxury/editoriale
-- Solo il rosso per errori e saldi = funzionale e d'impatto
-- Nero su bianco = contrasto eccellente (19:1) ✅
-- Grigio #666666 su bianco = contrasto buono (7.6:1) ✅
+| Token | Hex | Uso |
+|-------|-----|-----|
+| `--colore-sfondo` | `#FAFAF8` | Avorio — card prodotti |
+| `--colore-sfondo-caldo` | `#EDE8DF` | Crema — About, Testimonials |
+| `--colore-sfondo-scuro` | `#0F0F0F` | Inchiostro — Hero, Footer, Banner |
+| `--colore-accento` | `#8fcb9b` | Verde menta — CTA, hover, label |
+| `--colore-bordo` | `#E2DDD6` | Bordi card, separatori caldi |
+| `--colore-testo-principale` | `#0F0F0F` | Su sfondi chiari |
+| `--colore-testo-chiaro` | `#FAFAF8` | Su sfondi scuri |
+| `--colore-testo-muted` | `#6B6B6B` | Meta, prezzi secondari, caption |
+| `--colore-prezzo` | `#0F0F0F` | Prezzo standard |
+| `--colore-saldo` | `#D94F3D` | Prezzo scontato |
+| `--colore-disponibile` | `#2D6A4F` | Verde scuro — in stock |
+| `--colore-esaurito` | `#6B6B6B` | Grigio — out of stock |
 
----
+### Tipografia
 
-### 2. Tipografia
+**Font:** Syne (titoli + corpo) + Pacifico (script decorativo)
 
-```css
-/* === TIPOGRAFIA === */
-:root {
-    --font-titoli: 'Manrope', sans-serif;
-    --font-corpo: 'Manrope', sans-serif;
-    --font-script: 'Pacifico', cursive;  /* Per arricchire payoff */
-    
-    /* Scale Fluide (Zero Media Queries) */
-    --testo-h1: clamp(3.15rem, 8vw, 5.61rem);  /* ~50px -> 90px (Hero) */
-    --testo-h2: clamp(2.36rem, 5vw, 3.15rem);  /* ~37px -> 50px (Titoli sezioni) */
-    --testo-lg: 1.777rem;               /* 28px (H3) */
-    --testo-base: 1rem;                 /* 16px (Body standard) */
-    --testo-sm: 0.875rem;               /* 14px (UI/Menu) */
-    --testo-xs: 0.75rem;                /* 12px (Dettagli) */
-    
-    /* Dettagli Editoriali */
-    --interlinea-stretta: 1.1;          /* Titoli (Manrope ha x-height ottima) */
-    --interlinea-base: 1.6;             /* Corpo (Ottimo per lettura prolungata) */
-    
-    /* Pesi Font */
-    --fw-regular: 400;
-    --fw-bold: 700;
-}
-```
+| Token | Valore | Uso |
+|-------|--------|-----|
+| `--testo-xs` | `0.75rem` | Label, badge, meta |
+| `--testo-sm` | `0.875rem` | UI, menu, caption |
+| `--testo-base` | `clamp(1rem, 2vw, 1.125rem)` | Corpo testo |
+| `--testo-md` | `clamp(1.125rem, 2.5vw, 1.375rem)` | Sottotitoli, intro |
+| `--testo-lg` | `clamp(1.375rem, 3vw, 1.75rem)` | H3, titoli card |
+| `--testo-h2` | `clamp(2rem, 4.5vw, 2.75rem)` | H2 sezioni |
+| `--testo-h1` | `clamp(2.75rem, 8vw, 5.61rem)` | Hero headline |
 
-**Font Caricati:**
-- ✅ **Manrope** (Regular 400, Medium 500, Bold 700) - Google Fonts
-  - Uso: Font principale per titoli e corpo
-  - URL: https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700
-  
-- ✅ **Pacifico** (Regular 400) - Google Fonts
-  - Uso: Font script per arricchire payoff
-  - URL: https://fonts.googleapis.com/css2?family=Pacifico&display=swap
+### Spaziature
+
+| Token | Valore | Uso |
+|-------|--------|-----|
+| `--spazio-xs` | `0.5rem` | Micro gap |
+| `--spazio-s` | `1rem` | Interno componenti |
+| `--spazio-m` | `2rem` | Separazione standard |
+| `--spazio-l` | `4rem` | Separazione macro |
+| `--spazio-xl` | `6rem` | Extra-large |
+| `--spazio-xxl` | `8rem` | XXL |
+| `--spazio-sezione` | `clamp(4rem, 10vw, 8rem)` | Padding sezioni |
+| `--padding-laterale` | `clamp(1.25rem, 5vw, 3rem)` | Safe area mobile → desktop |
+| `--container-width` | `1290px` | Max width |
+
+### UI Base
+
+| Token | Valore |
+|-------|--------|
+| `--raggio-bordo` | `0px` (angoli netti) |
+| `--transizione-base` | `0.2s ease-out` |
 
 ---
 
-### 3. Spaziatura
+## Architettura Homepage
 
-```css
-/* === SPAZIATURA === */
-:root {
-    /* Scala Proporzionale (rem-based) */
-    --spazio-xs: 0.5rem;   /* 8px - margin/padding piccoli */
-    --spazio-s: 1rem;      /* 16px - spacing standard */
-    --spazio-m: 2rem;      /* 32px - spacing medio */
-    --spazio-l: clamp(4rem, 8vw, 6rem);   /* Margini tra sezioni */
-    --spazio-xl: clamp(6rem, 12vw, 12rem); /* Spazi macro per respiro premium */
-    
-    /* Componenti */
-    --spazio-card: var(--spazio-s);
-    --spazio-sezione: var(--spazio-l);
-    --spazio-container: clamp(1rem, 5vw, 25px);
-}
-```
+Ordine sezioni in `front-page.php`:
 
----
-
-### 4. Elementi UI
-
-```css
-/* === ELEMENTI UI === */
-:root {
-    /* Layout */
-    --max-width: 1290px;
-    --container-p: clamp(1rem, 5vw, 25px);
-    
-    /* Bordi e Angoli */
-    --radius: 0px;        /* Angoli netti = look più lussuoso ed editoriale */
-    --border-thin: 1px solid var(--colore-bordo);
-    --border-thick: 2px solid var(--colore-testo);
-    
-    /* Ombre */
-    --shadow-soft: 0 4px 20px rgba(0,0,0,0.03); /* Ombre quasi invisibili */
-    --shadow-medium: 0 8px 30px rgba(0,0,0,0.06);
-    --shadow-hover: 0 12px 40px rgba(0,0,0,0.1);
-    
-    /* Proporzioni */
-    --aspect-ratio-fashion: 3 / 4; /* Standard abbigliamento */
-    --aspect-ratio-hero: 16 / 9;   /* Hero images */
-    
-    /* Transizioni (DA DEFINIRE) */
-    --transition-fast: 0.2s ease;
-    --transition-normal: 0.3s ease;
-    --transition-slow: 0.5s ease;
-    
-    /* Opacity (DA DEFINIRE?) */
-    --opacity-disabled: 0.5;
-    --opacity-hover: 0.8;
-}
-```
-
----
-
-### 5. Z-Index Stack
-
-```css
-/* === Z-INDEX STACK === */
-:root {
-    --z-dropdown: 100;
-    --z-sticky: 200;
-    --z-modal: 1000;
-    --z-tooltip: 2000;
-    --z-notification: 3000;
-}
-```
+| # | Sezione | Background | Template / CSS |
+|---|---------|------------|----------------|
+| 1 | **Hero** | Scuro + video | `hero-payoff.css` |
+| 2 | **Editorial Ticker** | Scuro | `home-page.css` |
+| 3 | **Collections Grid** | Caldo | `home-page.css` |
+| 4 | **Curated Selection** | Caldo | `home-page.css` |
+| 5 | **About Us** | Caldo | `home-page.css` |
+| 6 | **Testimonials** | Caldo | `home-page.css` |
+| 7 | **Banner Evento** | Scuro | `banner-evento.php` |
+| 8 | **Sezione Eventi** | Scuro | `sezione-eventi.php` |
+| 9 | **USP Bar** | Scuro | `usp-bar.php` |
+| 10 | **Contact** | Scuro | `home-page.css` |
 
 ---
 
 ## Stati Interattivi
 
-### Hover States
+### Bottoni `.btn`
 
-**DA DEFINIRE:** Come reagisce l'hover?
+3 varianti con microinterazione fill dal basso:
 
-**Opzione A - Inversione Colori:**
-```css
-/* Bottone nero → bianco */
-.button:hover {
-    background-color: var(--colore-sfondo);
-    color: var(--colore-testo);
-    border-color: var(--colore-testo);
-}
-```
+| Variante | Default | Hover |
+|----------|---------|-------|
+| `.btn-light` | Trasparente, bordo bianco | Fill bianco, testo scuro |
+| `.btn-dark` | Nero pieno | Fill verde, testo scuro |
+| `.btn-accent` | Trasparente, bordo verde | Fill verde, testo scuro |
 
-**Opzione B - Sfondo Nero:**
-```css
-/* Bottone trasparente → nero */
-.button:hover {
-    background-color: var(--colore-testo);
-    color: var(--colore-sfondo);
-}
-```
+**Effetti hover:**
+- `::before` fill dal basso con `cubic-bezier(0.22, 1, 0.36, 1)`
+- Lift `translateY(-1px)` + shadow soffice
+- `.btn--arrow` → freccia nudge `translateX(3px)`
 
-**Opzione C - Sottolineatura:**
-```css
-/* Link con linea sotto */
-a:hover {
-    text-decoration: underline;
-}
-```
+**Accessibilità:**
+- `:focus-visible` → ring `--colore-accento`, offset 3px
+- `prefers-reduced-motion` → nessuna animazione
 
-### Focus States (Accessibilità)
+### Showroom Card
 
-```css
-:root {
-    --colore-focus: #333333; /* Per accessibilità WCAG */
-}
+| Stato | Sfondo | Testo | Freccia | Underline |
+|-------|--------|-------|---------|-----------|
+| Default | `#0F0F0F` | Bianco/bordo | Verde accento | — |
+| Hover | `#8fcb9b` (verde) | Scuro | Scuro, +6px dx | Cresce da sinistra |
 
-:focus-visible {
-    outline: 2px solid var(--colore-focus);
-    outline-offset: 2px;
-}
-```
+### Collection Cards (768px+)
+
+- Hover → zoom immagine `scale(1.05)` + titolo slide-in
+- Small items → overlay fade
+
+### Evento Cards
+
+- Hover → lift `translateY(-4px)` + shadow + immagine zoom `scale(1.04)`
+
+---
+
+## CPT Evento
+
+- **Registro:** `inc/cpt-evento.php`
+- **Template:** `single-evento.php`, `archive-evento.php`
+- **Banner:** `template-parts/banner-evento.php` (homepage)
+- **Grid:** `template-parts/sezione-eventi.php` (homepage)
+- **Archivio:** 2 colonne tablet, 3 colonne desktop
+- **Singolo:** Hero full-width + contenuto 780px centrato
 
 ---
 
 ## Linee Guida Immagini
 
-### Photography Style
-
-- **Stile fotografico:** [ES. Studio clean, Lifestyle naturale, Editorial]
-- **Atmosfera:** [ES. Minimal, Colorato, Mood specifico]
-- **Illuminazione:** [ES. Soft, High contrast, Natural]
-
-### Formato Immagini
-
 | Tipo | Aspect Ratio | Note |
-|------|--------------|------|
-| Hero | 16:9 o 3:2 | Full width, impatto |
-| Prodotti | 3:4 | Standard abbigliamento |
-| Thumbnail | 1:1 | Per grid prodotto |
-| Banner | 21:9 o 4:1 | Wide banners |
+|------|-------------|------|
+| Hero | Auto (90svh) | Video poster + fallback |
+| Collection | 3:4 | Moda standard |
+| Evento card | 4:3 | Landscape |
+| Prodotto | 3:4 | Abbigliamento |
+| Banner evento | Contain | Side-by-side 768px+ |
 
-### Compressione
-- Formato: WebP (fallback JPEG/PNG)
-- Dimensione max: [ES. 500KB per immagine]
-- Lazy loading: Attivo (nativo Blocksy)
-
----
-
-## Architettura delle Pagine
-
-### 1. Homepage
-
-**Sezioni:**
-- [ ] Hero Section (grande impatto)
-- [ ] Best Sellers / Featured
-- [ ] Nuovi Arrivi
-- [ ] Categorie / Collections
-- [ ] Brand Story / About
-- [ ] Newsletter signup
-- [ ] Footer
-
-### 2. Shop / Archivio Prodotti
-
-**Componenti:**
-- [ ] Filtri laterali
-- [ ] Grid prodotti
-- [ ] Ordinamento
-- [ ] Pagination / Infinite scroll
-
-### 3. Single Product
-
-**Sezioni:**
-- [ ] Immagini prodotto (gallery)
-- [ ] Info prodotto (titolo, prezzo, descrizione)
-- [ ] Varianti (taglia, colore)
-- [ ] Add to cart
-- [ ] Related products
-- [ ] Recensioni
-
-### 4. Cart & Checkout
-
-**Flusso:**
-- [ ] Carrello con modifiche quantità
-- [ ] Checkout one-page (se possibile Blocksy)
-- [ ] Payment options
-- [ ] Order summary
-
-### 5. Pagine Informative
-
-- [ ] About Us
-- [ ] Contact
-- [ ] Shipping & Returns
-- [ ] FAQ
-- [ ] Privacy Policy
-- [ ] Terms & Conditions
+- **Formato:** WebP (fallback JPEG)
+- **Lazy loading:** Nativo WordPress/Blocksy
+- **Object-fit:** `cover` con `object-position: center top`
 
 ---
 
-## Componenti UI
+## Stato del Progetto
 
-### Bottoni
+### Completato ✅
+- [x] Struttura child theme + enqueue condizionale
+- [x] Design system CSS completo
+- [x] Homepage 10 sezioni
+- [x] CPT Evento + template
+- [x] Microinterazioni hover (bottoni + showroom)
+- [x] Accessibilità (skip-link, focus-visible, reduced-motion)
+- [x] Header trasparente + sticky + menu attivo
 
-```css
-/* Primary Button */
-.btn-primary {
-    background: var(--colore-testo);
-    color: var(--colore-sfondo);
-    padding: var(--spazio-s) var(--spazio-m);
-    border: none;
-    transition: all var(--transition-normal);
-}
-
-/* Secondary Button (Outline) */
-.btn-secondary {
-    background: transparent;
-    color: var(--colore-testo);
-    border: var(--border-thick);
-}
-```
-
-### Card Prodotto
-
-```css
-.product-card {
-    background: var(--colore-sfondo);
-    border: var(--border-thin);
-    padding: var(--spazio-card);
-    transition: all var(--transition-normal);
-}
-```
+### Da definire 🔲
+- [ ] Photography style guideline
+- [ ] WooCommerce shop + single product override
+- [ ] Cart + checkout styling
+- [ ] Email transactionali
+- [ ] Performance optimization (Core Web Vitals)
+- [ ] SEO meta dinamico (OG tags, JSON-LD)
 
 ---
 
-## Note e TODO
-
-### Da Definire
-- [x] Hover state style definito (Opzione C: Sottolineatura)
-- [x] Transizioni fast/normal/slow definite
-- [x] Palette colori estesa (Syne + lilla)
-- [x] Tipografia completa (Syne + monospace)
-- [ ] Loading Manrope - Google Fonts o Self-hosted?
-- [x] Nome brand e missione definiti
-- [x] Target audience specifico
-- [ ] Photography style
-
-### Completati
-- [x] Font Syne e Monospace aggiunti al backend WordPress
-- [x] Colore lilla #E6E0F8 documentato nel design system
-- [x] Design System SITO.md allineato con assets/design-system.css
-
-### Next Steps
-1. Definire photography style
-2. Definire loading Manrope (Google Fonts o Self-hosted?)
-3. Mappare funzionalità WooCommerce necessarie
-4. Definire tipi di prodotti
-
----
-
-## Riferimenti
-
-- Siti di ispirazione: [LISTA LINK]
-- Competitors: [LISTA]
-- Moodboard: [LINK FIGMA/DOCS]
-
----
-
-## Versione
-
-- **Ultimo aggiornamento:** [DATA]
-- **Versione Design System:** 1.0
-- **Stato:** In definizione
+**Ultimo aggiornamento:** Aprile 2026  
+**Versione:** 0.3  
+**Stato:** In sviluppo attivo

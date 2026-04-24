@@ -1,364 +1,145 @@
-# Blocksy Child Theme
+# Total Femininity — Child Theme
 
-Tema child per [Nome del Tuo Brand] costruito su Blocksy + WooCommerce.
+Child theme Blocksy + WooCommerce per e-commerce fashion premium.
 
-##  Indice
-
-- [Requisiti](#requisiti)
-- [Installazione](#installazione)
-- [Struttura dei File](#struttura-dei-file)
-- [Guida Rapida](#guida-rapida)
-- [Best Practices](#best-practices)
+**Stack:** WordPress 6.x · Blocksy · WooCommerce · Syne + Pacifico  
+**Repo:** `git@github.com:Sinner-Dev95/Ecommerce-total-femininity.git`
 
 ---
 
-##  Requisiti
+## Struttura File
 
-- WordPress 6.0+
-- Blocksy (tema genitore) - versione più recente
-- WooCommerce (per e-commerce)
-- PHP 7.4 o superiore
+```
+total-femininity/
+├── style.css                          # Header tema child
+├── functions.php                      # Enqueue, CPT, hooks
+├── front-page.php                     # Homepage template
+├── single-evento.php                  # Singolo evento
+├── archive-evento.php                 # Archivio eventi
+│
+├── assets/
+│   ├── design-system.css              # Token: colori, font, spazi, componenti base (.btn)
+│   ├── home-page.css                  # Homepage: hero, collections, about, testimonials, contact, eventi, USP
+│   ├── hero-payoff.css                # Payoff section (se usato)
+│   ├── animation.css                  # Animazioni CSS
+│   ├── woo-commerce-layout.css        # Override WooCommerce
+│   └── blocksy-child-*.min.css        # Build minificati
+│
+├── scripts/
+│   ├── main.js                        # JS principale
+│   └── animation.js                   # Animazioni JS
+│
+├── inc/
+│   ├── cpt-evento.php                 # Custom Post Type Evento
+│   ├── customizer.php                 # WordPress Customizer
+│   └── hero-payoff.php                # Hero/Payoff logic
+│
+├── template-parts/
+│   ├── banner-evento.php              # Banner evento (homepage)
+│   ├── sezione-eventi.php             # Grid eventi (homepage)
+│   └── usp-bar.php                    # USP bar stats
+│
+├── README.md                          # Questo file
+└── SITO.md                            # Documentazione brand + design system
+```
 
 ---
 
-##  Installazione
+## Design Tokens (quick ref)
 
-### Metodo 1: Tramite FTP/SFTP
+Solo i valori usati. Fonte: `assets/design-system.css`
 
-1. Carica la cartella `blocksy-child` in `wp-content/themes/`
-2. Vai in **WordPress Admin > Aspetto > Temi**
-3. Attiva "Blocksy Child"
-4. Importa le configurazioni Blocksy se richiesto
+| Token | Valore | Uso |
+|-------|--------|-----|
+| `--colore-sfondo` | `#FAFAF8` | Avorio — sfondo chiaro |
+| `--colore-sfondo-caldo` | `#EDE8DF` | Crema sabbia — About, Testimonials |
+| `--colore-sfondo-scuro` | `#0F0F0F` | Inchiostro — Hero, Footer |
+| `--colore-accento` | `#8fcb9b` | Verde menta — CTA, hover, label |
+| `--colore-bordo` | `#E2DDD6` | Bordi caldi |
+| `--colore-testo-principale` | `#0F0F0F` | Testo su chiaro |
+| `--colore-testo-chiaro` | `#FAFAF8` | Testo su scuro |
+| `--colore-testo-muted` | `#6B6B6B` | Meta, caption |
+| `--font-titoli` | `'Syne', sans-serif` | Titoli e corpo |
+| `--font-script` | `'Pacifico', cursive` | Payoff, accenti |
+| `--raggio-bordo` | `0px` | Angoli netti |
+| `--transizione-base` | `0.2s ease-out` | Transizione standard |
 
-### Metodo 2: Tramite Git (Development)
+### Breakpoints
+
+| Nome | Valore | Uso |
+|------|--------|-----|
+| Mobile | `< 640px` | Base |
+| Tablet | `640px – 767px` | Transizione |
+| Desktop | `768px – 1023px` | Layout row |
+| Large | `1024px – 1289px` | Grid 3 col |
+| XL | `1290px+` | Container centrato |
+
+---
+
+## Convenzioni CSS
+
+- **Mobile-first** — base = mobile, `@media (min-width)` per tablet/desktop
+- **Nessun `!important`** — se serve, aumentare specificità
+- **Variabili** — usare sempre token da `design-system.css`
+- **Sezioni** — commento header `/* === NOME SEZIONE === */`
+- **Prefisso** — classi componenti: `.about-*`, `.showroom-*`, `.banner-evento-*`
+- **Accessibilità** — `prefers-reduced-motion: reduce` per ogni animazione
+
+### Componente Bottone `.btn`
+
+Base in `design-system.css`, varianti colore in `home-page.css`:
+
+| Classe | Sfondo | Su |
+|--------|--------|-----|
+| `.btn-light` | Trasparente → bordo bianco | Sfondo scuro |
+| `.btn-dark` | Nero → verde accento | Sfondo chiaro |
+| `.btn-accent` | Trasparente → verde | Sfondo scuro |
+
+Microinterazioni: fill dal basso (`::before`), lift 1px, focus-visible ring.
+
+---
+
+## Comandi Utili
 
 ```bash
-cd wp-content/themes/
-git clone [tuo-repo-url] blocksy-child
+# Avvio sviluppo locale (se ambiente configurato)
+wp-env start
+
+# Build CSS minificati (se pipeline configurata)
+# Non ancora automatizzato — aggiornare manualmente i file .min.css
 ```
 
 ---
 
-##  Struttura dei File
+## Changelog
 
-```
-blocksy-child/
-├── functions.php                    # Hooks e enqueue scripts/styles
-├── style.css                        # Header tema + import moduli CSS
-├── assets/
-│   ├── design-system.css           # Design system (colori, tipografia, spaziatura)
-│   ├── home-page.css               # CSS specifico per homepage
-│   └── woo-commerce-layout.css     # Override WooCommerce
-├── scripts/
-│   └── main.js                     # JavaScript personalizzato
-├── .gitignore                      # File esclusi dal version control
-├── README.md                       # Documentazione tecnica (questo file)
-└── SITO.md                         # Documentazione sito (brand, design system)
-```
+### v0.3 — Microinterazioni & Fix (Aprile 2026)
+- Aggiunto hover microinterazioni a `.btn` (fill dal basso + lift)
+- Aggiunto hover microinterazioni a showroom card (sfondo verde + testo scuro)
+- Fix `@media` annidato in banner-evento
+- Aggiunto gap tra testo e foto nel banner evento (768px+)
+- `prefers-reduced-motion` per tutte le animazioni
 
----
+### v0.2 — Sezioni Homepage (Marzo 2026)
+- Hero con video poster + badge sconto
+- Payoff editoriale (Pacifico)
+- Collections grid (3/4 ratio, hover zoom)
+- Curated Selection (carousel mobile, arrows desktop)
+- About Us (60/40 grid, showroom card)
+- Testimonials carousel
+- Contact section (Forminator override)
+- Banner Evento + Sezione Eventi
+- USP Bar (4 stats)
+- CPT Evento + archivio + singolo
 
-##  Guida Rapida
-
-### Modificare il CSS
-
-1. **Design System** → Modifica `assets/design-system.css`
-   - Variabili CSS (colori, tipografia, spaziatura)
-   - Reset e base styles
-
-2. **Homepage** → Modifica `assets/home-page.css`
-   - Hero section
-   - Sezioni specifiche
-   - Componenti custom
-
-3. **WooCommerce** → Modifica `assets/woo-commerce-layout.css`
-   - Layout prodotti
-   - Cart e checkout
-   - Override plugin
-
-### Modificare il JavaScript
-
-Tutto il JavaScript custom va in `scripts/main.js`
-
-### Aggiungere Funzionalità PHP
-
-Usa sempre l'hook `wp_enqueue_scripts` per caricare asset:
-
-```php
-// functions.php
-add_action('wp_enqueue_scripts', 'blocksy_child_enqueue_scripts');
-function blocksy_child_enqueue_scripts() {
-    wp_enqueue_script('child-main', get_stylesheet_directory_uri() . '/scripts/main.js', array(), '1.0.0', true);
-}
-```
-
-### Aggiungere Hooks/Filters Blocksy
-
-Blocksy usa filtri standard WordPress e propri. Consulta [documentazione Blocksy](https://creativethemes.com/blocksy/docs/) per filtri disponibili.
-
-Esempio:
-
-```php
-// Rimuovere feature del parent
-add_filter('blocksy:some-feature', '__return_false');
-```
+### v0.1 — Setup (Febbraio 2026)
+- Struttura child theme Blocksy
+- Design system CSS (palette, tipografia, spaziature)
+- Enqueue condizionale per pagina
+- Header trasparente + sticky
 
 ---
 
-## ⚡ Best Practices
+## Licenza
 
-### CSS
-- Usa sempre le **variabili CSS** definite in `design-system.css`
-- Evita `!important` (usa specificità corretta)
-- Commenta le sezioni con `/* === Nome Sezione === */`
-- Usa **mobile-first** approccio
-
-### PHP
-- **Sempre** verifica `ABSPATH` per sicurezza
-- Usa escaping per output: `esc_html()`, `esc_url()`, `esc_attr()`
-- Sanitize input: `sanitize_text_field()`, `sanitize_email()`
-- Usa `wp_enqueue_scripts` per caricare asset
-- Prefissa tutte le funzioni con `blocksy_child_`
-
-### JavaScript
-- Usa `document.addEventListener('DOMContentLoaded', ...)`
-- Evita conflitti con Blocksy e WooCommerce
-- Usa delegazione eventi per elementi dinamici
-
-### Git
-- Commits piccoli e atomici
-- Messaggi chiari (es. "feat: add hero section styles")
-- Mai commitare file in `.gitignore`
-- Branch naming: `feature/*`, `fix/*`, `refactor/*`
-
----
-
-## SEO Guidelines
-
-### Meta Tags (Header PHP)
-
-Il meta tag description deve essere aggiunto via `functions.php`:
-
-```php
-// Aggiunge meta description per ogni pagina
-add_action('wp_head', 'blocksy_child_add_meta_description');
-function blocksy_child_add_meta_description() {
-    if (is_singular()) {
-        $description = get_post_meta(get_the_ID(), '_blocksy_page_description', true);
-        if ($description) {
-            echo '<meta name="description" content="' . esc_attr($description) . '">' . "\n";
-        }
-    }
-}
-```
-
-### Schema.org Markup
-
-Il tema include già markup schema.org in `front-page.php`:
-- `itemprop="headline"` - Titolo principale (H1)
-- `itemprop="description"` - Descrizione del brand
-- `role="banner"` - Identifica area hero/header
-- `role="main"` - Identifica contenuto principale
-
-Per aggiungere markup WooCommerce:
-
-```php
-// Aggiunge Product schema per singolo prodotto
-add_action('woocommerce_before_single_product', 'blocksy_child_product_schema');
-function blocksy_child_product_schema() {
-    global $product;
-    // Implementare markup JSON-LD per prodotto
-}
-```
-
-### Open Graph / Twitter Cards
-
-Per social media preview:
-
-```php
-add_action('wp_head', 'blocksy_child_add_og_tags');
-function blocksy_child_add_og_tags() {
-    if (is_single() || is_page()) {
-        $title = get_the_title();
-        $url = get_permalink();
-        $image = get_the_post_thumbnail_url(null, 'large');
-        
-        echo '<meta property="og:title" content="' . esc_attr($title) . '">' . "\n";
-        echo '<meta property="og:url" content="' . esc_url($url) . '">' . "\n";
-        if ($image) {
-            echo '<meta property="og:image" content="' . esc_url($image) . '">' . "\n";
-        }
-        echo '<meta property="og:type" content="website">' . "\n";
-    }
-}
-```
-
-### SEO Best Practices
-
-- **Titoli**: H1 unico per pagina, H2-H6 gerarchici
-- **URL**: URL leggibili, keyword nella slug
-- **Immagini**: Alt text sempre presente, nomi descrittivi
-- **Contenuto**: Testo sufficiente, keyword naturali
-- **Performance**: Core Web Vitals sotto soglia (LCP < 2.5s, CLS < 0.1)
-
----
-
-## Accessibility Guidelines
-
-### WCAG 2.1 Compliance
-
-Il tema segue le linee guida WCAG 2.1 AA:
-
-### Contrast Ratio
-
-- Testo normale: minimo 4.5:1 (nero su bianco: 19:1)
-- Testo grande (>18px): minimo 3:1
-- UI components: minimo 3:1
-- Verifica con: [WebAIM Contrast Checker](https://webaim.org/resources/contrastchecker/)
-
-### Keyboard Navigation
-
-- **Skip-to-content link**: Implementato in `front-page.php`
-  - Hidden by default (`top: -100px`)
-  - Visible on focus (`top: 10px`)
-  - High contrast (black background, white text)
-
-- **Focus states**: Tutti gli elementi interattivi devono avere focus visible
-```css
-:focus-visible {
-    outline: 2px solid #333333;
-    outline-offset: 2px;
-}
-```
-
-### ARIA Labels & Roles
-
-Il tema include già:
-- `role="banner"` - Hero section
-- `role="main"` - Contenuto principale
-- `aria-label` - CTA buttons, collection cards
-- Video: `role="img"` + `aria-label` descrittivo
-
-### Screen Reader Support
-
-```php
-// Per contenuti solo visivi
-echo '<span class="screen-reader-only">' . esc_html($text) . '</span>';
-```
-
-CSS associato:
-```css
-.screen-reader-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border-width: 0;
-}
-```
-
-### Semantic HTML
-
-- `<header>` per header navigazione
-- `<main>` per contenuto principale
-- `<nav>` per menu di navigazione
-- `<section>` per sezioni tematiche
-- `<article>` per contenuti autonomi
-- `<footer>` per footer
-
-### Image Alt Text
-
-```php
-// In template
-the_post_thumbnail('large', array(
-    'alt' => get_the_title_attribute(array('echo' => false)),
-    'loading' => 'lazy'
-));
-```
-
-### Form Accessibility
-
-```php
-// Labels associati
-<label for="email">Email</label>
-<input type="email" id="email" name="email" required aria-required="true">
-```
-
-### Testing Tools
-
-- [WAVE Browser Extension](https://wave.webaim.org/)
-- [Lighthouse Accessibility Audit](https://developers.google.com/web/tools/lighthouse)
-- [axe DevTools](https://www.deque.com/axe/)
-- [Keyboard only navigation testing]
-
-### Required Before Go-Live
-
-- [ ] Test con solo tastiera (Tab, Enter, Escape)
-- [ ] Test screen reader (NVDA, JAWS, VoiceOver)
-- [ ] Verifica contrasti tutti i colori
-- [ ] Verifica zoom 200% (content must be readable)
-- [ ] Test skip-to-content link
-- [ ] Verifica tutti i focus states
-- [ ] Test form validation messages
-- [ ] Verifica mobile touch targets (min 44x44px)
-
----
-
-##  Sicurezza
-
-- Tutti i file PHP hanno controllo `ABSPATH`
-- Input sempre sanitizzati
-- Output sempre escaped
-- Non esporre dati sensibili via API/public
-
----
-
-##  Performance
-
-- CSS caricato solo dove necessario
-- Versioning dinamico per cache busting
-- Nessuna dipendenza non necessaria
-- Lazy loading immagini (Blocksy native)
-
----
-
-##  Debugging
-
-Abilita `WP_DEBUG` in `wp-config.php`:
-
-```php
-define('WP_DEBUG', true);
-define('WP_DEBUG_LOG', true);
-define('WP_DEBUG_DISPLAY', false);
-```
-
-Il log si trova in `wp-content/debug.log`
-
----
-
-##  Risorse Utili
-
-- [Documentazione Blocksy](https://creativethemes.com/blocksy/docs/)
-- [Documentazione WooCommerce](https://woocommerce.com/documentation/)
-- [WordPress Codex](https://developer.wordpress.org/)
-- [WordPress Block Editor](https://developer.wordpress.org/block-editor/)
-
----
-
-##  Changelog
-
-### 1.0.0 (In Development)
-- Setup struttura tema child
-- Design system base
-- Homepage layout
-- WooCommerce override base
-
----
-
-##  License
-
-Questo tema child segue la stessa licenza di Blocksy: GNU General Public License v2 o successiva.
+GNU General Public License v2 — come Blocksy parent.
