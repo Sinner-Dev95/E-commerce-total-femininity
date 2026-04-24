@@ -1367,7 +1367,6 @@ LANDSCAPE LOW HEIGHT
     z-index: 10;
 }
 
-
 /* ============================================================
    CONTACT SECTION
    Mobile-first | Coerente con design system
@@ -1391,9 +1390,18 @@ LANDSCAPE LOW HEIGHT
     font-weight: bold;
     color: var(--colore-testo-chiaro);
     line-height: var(--interlinea-stretta);
-    margin: 0 0 var(--spazio-m) 0;
+    margin: 0 0 var(--spazio-xs) 0;
 }
 
+.contact-intro {
+    font-family: var(--font-corpo);
+    font-size: var(--testo-md);
+    color: var(--colore-testo-muted);
+    line-height: var(--interlinea-base);
+    max-width: 520px;
+    margin: 0 0 var(--spazio-l) 0;
+    text-align: left;
+}
 /* ============================================================
    FORMINATOR OVERRIDE — Coerente con design system
    ============================================================ */

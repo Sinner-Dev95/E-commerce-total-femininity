@@ -109,14 +109,17 @@ get_header();
                 </em>
             </h2>
             <p itemprop="description" data-usal="fade-u blur-2 delay-400">
-                Boutique di abbigliamento femminile nata a Torino nel 2026. Due sorelle, una visione: la moda come definizione di identità. Ogni capo è una scelta — la tua scelta.
+                Boutique di abbigliamento femminile nata a Torino nel 2026,
+                fondata da due sorelle con una visione precisa: la moda come
+                atto di identità. Acquista online con spedizione rapida in
+                tutta Italia o vieni nel nostro showroom a Settimo Torinese.
             </p>
         </div>
     </section>
 
 </div>
 
-<?php get_template_part( 'template-parts/banner-evento' ); ?>
+<?php get_template_part('template-parts/banner-evento'); ?>
 
 <!-- Ticker Editoriale -->
 <div class="editorial-ticker" aria-label="Promozioni e novità" role="marquee">
@@ -188,7 +191,7 @@ $secondary = ($featured === 'pe') ? 'ai' : 'pe';
 
 <section class="curated-selection-section" data-usal="fade-u duration-1000 once threshold-10">
     <header class="curated-header">
-        <h2 class="curated-title">Curated Selection</h2>
+        <h2 class="curated-title">I Nostri Preferiti</h2>
         <a href="<?php echo esc_url($shop_url); ?>"
             class="btn btn-dark curated-view-all"
             aria-label="Vedi tutti i prodotti nello shop">
@@ -200,7 +203,7 @@ $secondary = ($featured === 'pe') ? 'ai' : 'pe';
     </div>
 </section>
 
-<?php get_template_part( 'template-parts/sezione-eventi' ); ?>
+<?php get_template_part('template-parts/sezione-eventi'); ?>
 
 <?php
 $about_avatar_id  = get_theme_mod('about_avatar_image', 0);
@@ -353,11 +356,11 @@ $testimonials = [
         <div class="testimonials-dots" aria-label="Navigazione testimonianze">
             <?php foreach ($testimonials as $index => $testimonial): ?>
                 <button
-                    class="testimonial-dot <?php echo esc_attr( $index === 0 ? 'active' : '' ); ?>"
+                    class="testimonial-dot <?php echo esc_attr($index === 0 ? 'active' : ''); ?>"
                     tabindex="0"
-                    aria-label="Vai alla testimonianza <?php echo esc_attr( $index + 1 ); ?>"
+                    aria-label="Vai alla testimonianza <?php echo esc_attr($index + 1); ?>"
                     aria-current="<?php echo $index === 0 ? 'true' : 'false'; ?>"
-                    data-slide="<?php echo esc_attr( $index ); ?>">
+                    data-slide="<?php echo esc_attr($index); ?>">
                 </button>
             <?php endforeach; ?>
         </div>
@@ -368,6 +371,11 @@ $testimonials = [
     <div class="contact-container">
         <header class="contact-header">
             <h2 class="contact-title">Scrivici</h2>
+             <p class="contact-intro">
+        Hai una domanda su taglie, spedizioni o vuoi prenotare 
+        una visita allo showroom di Settimo Torinese? 
+        Rispondiamo entro 24 ore.
+    </p>
         </header>
         <?php echo do_shortcode('[forminator_form id="252"]'); ?>
     </div>
