@@ -460,5 +460,5 @@ function tf_get_attachment_url( $id, $default = '' ) {
  * @return bool        true se checked, false altrimenti
  */
 function tf_sanitize_checkbox( $value ) {
-    return ( isset( $value ) && true === $value );
+    return (bool) $value;
 }

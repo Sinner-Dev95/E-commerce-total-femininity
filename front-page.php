@@ -122,7 +122,7 @@ get_header();
 <?php get_template_part('template-parts/banner-evento'); ?>
 
 <!-- Ticker Editoriale -->
-<div class="editorial-ticker" aria-label="Promozioni e novità" role="marquee">
+<div class="editorial-ticker" aria-label="Promozioni e novità" role="region">
     <div class="ticker-track">
         <span class="ticker-item">✦ 10% SUL PRIMO ACQUISTO</span>
         <span class="ticker-separator">—</span>

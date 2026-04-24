@@ -176,18 +176,6 @@ HERO CONTENT
   line-height: var(--interlinea-stretta);
 }
 
-.cta-button {
-    background: var(--colore-sfondo-scuro);
-    color: var(--colore-testo-chiaro);
-    border-color: var(--colore-testo-chiaro);
-}
-
-.cta-button:hover {
-    background: var(--colore-accento);
-    color: var(--colore-sfondo-scuro);
-    border-color: var(--colore-sfondo-scuro);
-}
-
 /* ============================================================
 HERO BADGE
 ============================================================ */
@@ -247,10 +235,6 @@ HERO PLAY BUTTON
     cursor: pointer;
     width: fit-content;
     position: relative;
-}
-
-.hero-play-icon {
-    display: none;
 }
 
 .hero-play-label {
@@ -724,10 +708,9 @@ LANDSCAPE LOW HEIGHT
 
 .curated-view-all {
     white-space: nowrap;
-    color: var(--colore-testo-principale);
-    border-color: var(--colore-testo-principale);
     background: var(--colore-testo-principale);
     color: var(--colore-sfondo-caldo);
+    border-color: var(--colore-testo-principale);
 }
 
 .curated-view-all:hover {

@@ -32,7 +32,7 @@ function blocksy_child_enqueue_styles()
     // Uso jsDelivr diretto per evitare redirect e doppio caricamento
     wp_enqueue_script(
         'usal-js',
-        'https://cdn.jsdelivr.net/npm/usal@latest/usal.min.js',
+        'https://cdn.jsdelivr.net/npm/usal@1.3.1/usal.min.js',
         array(),
         null,
         true // carica nel footer — USAL si auto-inizializza, non serve nell'<head>
