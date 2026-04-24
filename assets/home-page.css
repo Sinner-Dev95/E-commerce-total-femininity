@@ -1637,15 +1637,14 @@ body .contact-section .forminator-custom-form .forminator-button.forminator-butt
     .banner-evento-inner {
         flex-direction: row;
         min-height: 340px;
+        gap: var(--spazio-m);
     }
 
-   @media (min-width: 768px) {
     .banner-evento-content {
         flex: 1;
         justify-content: center;
         padding: var(--spazio-l) var(--spazio-xl) var(--spazio-l) var(--padding-laterale);
     }
-}
 
     .banner-evento-media {
         display: flex;
