@@ -77,8 +77,13 @@ add_action( 'add_meta_boxes', 'tf_evento_metabox_register' );
 
 function tf_evento_metabox_render( $post ) {
     wp_nonce_field( 'tf_evento_save', 'tf_evento_nonce' );
-    $data  = get_post_meta( $post->ID, 'evento_data', true );
-    $luogo = get_post_meta( $post->ID, 'evento_luogo', true );
+    $data       = get_post_meta( $post->ID, 'evento_data', true );
+    $luogo      = get_post_meta( $post->ID, 'evento_luogo', true );
+    $start_date = get_post_meta( $post->ID, 'evento_start_date', true );
+    $end_date   = get_post_meta( $post->ID, 'evento_end_date', true );
+    $indirizzo  = get_post_meta( $post->ID, 'evento_indirizzo', true );
+    $citta      = get_post_meta( $post->ID, 'evento_citta', true );
+    $provincia  = get_post_meta( $post->ID, 'evento_provincia', true );
     ?>
     <table class="form-table" style="width:100%">
         <tr>
@@ -110,6 +115,85 @@ function tf_evento_metabox_render( $post ) {
             </td>
         </tr>
     </table>
+
+    <hr style="margin:16px 0; border:none; border-top:1px solid #ccd0d4">
+    <p style="font-weight:600; margin:0 0 8px 0; color:#1d2327">SEO / Google (Schema.org)</p>
+    <p style="color:#646970; margin:0 0 12px 0; font-size:13px">Dati per i <em>rich snippet</em> di Google. Campi obbligatori per apparire nei risultati di ricerca.</p>
+
+    <table class="form-table" style="width:100%">
+        <tr>
+            <th style="width:140px; padding:10px 0">
+                <label for="evento_start_date"><strong>Data inizio</strong> <span style="color:#d63638">*</span></label>
+            </th>
+            <td style="padding:6px 0">
+                <input
+                    type="date"
+                    id="evento_start_date"
+                    name="evento_start_date"
+                    value="<?php echo esc_attr( $start_date ); ?>"
+                    required
+                    style="width:100%; max-width:400px">
+            </td>
+        </tr>
+        <tr>
+            <th style="padding:10px 0">
+                <label for="evento_end_date">Data fine</label>
+            </th>
+            <td style="padding:6px 0">
+                <input
+                    type="date"
+                    id="evento_end_date"
+                    name="evento_end_date"
+                    value="<?php echo esc_attr( $end_date ); ?>"
+                    style="width:100%; max-width:400px">
+            </td>
+        </tr>
+        <tr>
+            <th style="padding:10px 0">
+                <label for="evento_indirizzo"><strong>Indirizzo</strong> <span style="color:#d63638">*</span></label>
+            </th>
+            <td style="padding:6px 0">
+                <input
+                    type="text"
+                    id="evento_indirizzo"
+                    name="evento_indirizzo"
+                    value="<?php echo esc_attr( $indirizzo ); ?>"
+                    placeholder="Es: Corso Vittorio Emanuele II, 120"
+                    required
+                    style="width:100%; max-width:400px">
+            </td>
+        </tr>
+        <tr>
+            <th style="padding:10px 0">
+                <label for="evento_citta"><strong>Città</strong> <span style="color:#d63638">*</span></label>
+            </th>
+            <td style="padding:6px 0">
+                <input
+                    type="text"
+                    id="evento_citta"
+                    name="evento_citta"
+                    value="<?php echo esc_attr( $citta ); ?>"
+                    placeholder="Es: Torino"
+                    required
+                    style="width:100%; max-width:400px">
+            </td>
+        </tr>
+        <tr>
+            <th style="padding:10px 0">
+                <label for="evento_provincia">Provincia</label>
+            </th>
+            <td style="padding:6px 0">
+                <input
+                    type="text"
+                    id="evento_provincia"
+                    name="evento_provincia"
+                    value="<?php echo esc_attr( $provincia ); ?>"
+                    placeholder="Es: TO"
+                    maxlength="5"
+                    style="width:100%; max-width:400px">
+            </td>
+        </tr>
+    </table>
     <?php
 }
 
@@ -124,6 +208,21 @@ function tf_evento_metabox_save( $post_id ) {
     }
     if ( isset( $_POST['evento_luogo'] ) ) {
         update_post_meta( $post_id, 'evento_luogo', sanitize_text_field( $_POST['evento_luogo'] ) );
+    }
+    if ( isset( $_POST['evento_start_date'] ) ) {
+        update_post_meta( $post_id, 'evento_start_date', sanitize_text_field( $_POST['evento_start_date'] ) );
+    }
+    if ( isset( $_POST['evento_end_date'] ) ) {
+        update_post_meta( $post_id, 'evento_end_date', sanitize_text_field( $_POST['evento_end_date'] ) );
+    }
+    if ( isset( $_POST['evento_indirizzo'] ) ) {
+        update_post_meta( $post_id, 'evento_indirizzo', sanitize_text_field( $_POST['evento_indirizzo'] ) );
+    }
+    if ( isset( $_POST['evento_citta'] ) ) {
+        update_post_meta( $post_id, 'evento_citta', sanitize_text_field( $_POST['evento_citta'] ) );
+    }
+    if ( isset( $_POST['evento_provincia'] ) ) {
+        update_post_meta( $post_id, 'evento_provincia', sanitize_text_field( $_POST['evento_provincia'] ) );
     }
 }
 add_action( 'save_post_evento', 'tf_evento_metabox_save' );

@@ -129,3 +129,97 @@ require_once get_stylesheet_directory() . '/inc/customizer.php';
 
 // Carica il Custom Post Type Evento
 require_once get_stylesheet_directory() . '/inc/cpt-evento.php';
+
+/**
+ * JSON-LD Schema.org Event — risolve errori Google Search Console
+ * Emette dati strutturati solo sulle pagine singolo evento.
+ * Se RankMath già gestisce lo schema Event, non emette nulla (evita duplicati).
+ */
+add_action( 'wp_head', 'tf_evento_json_ld', 5 );
+function tf_evento_json_ld() {
+    // Solo su singolo evento
+    if ( ! is_singular( 'evento' ) ) {
+        return;
+    }
+
+    $post_id = get_the_ID();
+
+    // Se RankMath gestisce già lo schema Event, esci
+    $rank_math_snippet = get_post_meta( $post_id, 'rank_math_rich_snippet', true );
+    if ( $rank_math_snippet === 'event' ) {
+        return;
+    }
+
+    // Campo obbligatorio — senza data non emettiamo schema
+    $start_date = get_post_meta( $post_id, 'evento_start_date', true );
+    if ( empty( $start_date ) ) {
+        return;
+    }
+
+    // Raccogli dati
+    $title      = get_the_title();
+    $url        = get_permalink();
+    $excerpt    = has_excerpt() ? get_the_excerpt() : '';
+    $thumb_url  = get_the_post_thumbnail_url( $post_id, 'full' );
+    $end_date   = get_post_meta( $post_id, 'evento_end_date', true );
+    $indirizzo  = get_post_meta( $post_id, 'evento_indirizzo', true );
+    $citta      = get_post_meta( $post_id, 'evento_citta', true );
+    $provincia  = get_post_meta( $post_id, 'evento_provincia', true );
+
+    // Costruisci schema
+    $schema = array(
+        '@context'               => 'https://schema.org',
+        '@type'                  => 'Event',
+        'name'                   => $title,
+        'url'                    => $url,
+        'startDate'              => $start_date,
+        'eventStatus'            => 'https://schema.org/EventScheduled',
+        'eventAttendanceMode'    => 'https://schema.org/OfflineEventAttendanceMode',
+    );
+
+    // End date opzionale
+    if ( ! empty( $end_date ) ) {
+        $schema['endDate'] = $end_date;
+    }
+
+    // Description
+    if ( ! empty( $excerpt ) ) {
+        $schema['description'] = wp_strip_all_tags( $excerpt );
+    }
+
+    // Image
+    if ( $thumb_url ) {
+        $schema['image'] = esc_url( $thumb_url );
+    }
+
+    // Location (Place + PostalAddress)
+    $schema['location'] = array(
+        '@type'   => 'Place',
+        'name'    => ! empty( $citta ) ? $citta : 'Total Femininity',
+        'address' => array(
+            '@type'           => 'PostalAddress',
+            'streetAddress'   => $indirizzo,
+            'addressLocality' => $citta,
+            'addressRegion'   => $provincia,
+            'addressCountry'  => 'IT',
+        ),
+    );
+
+    // Organizer
+    $schema['organizer'] = array(
+        '@type' => 'Organization',
+        'name'  => 'Total Femininity',
+        'url'   => home_url( '/' ),
+    );
+
+    // Performer
+    $schema['performer'] = array(
+        '@type' => 'Organization',
+        'name'  => 'Total Femininity',
+    );
+
+    // Emetti JSON-LD
+    echo '<script type="application/ld+json">' . "\n";
+    echo wp_json_encode( $schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT );
+    echo "\n" . '</script>' . "\n";
+}
