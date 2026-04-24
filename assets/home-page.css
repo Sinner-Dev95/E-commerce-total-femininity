@@ -1602,11 +1602,13 @@ body .contact-section .forminator-custom-form .forminator-button.forminator-butt
         min-height: 340px;
     }
 
+   @media (min-width: 768px) {
     .banner-evento-content {
         flex: 1;
         justify-content: center;
-        padding: var(--spazio-l) var(--padding-laterale);
+        padding: var(--spazio-l) var(--spazio-xl) var(--spazio-l) var(--padding-laterale);
     }
+}
 
     .banner-evento-media {
         display: flex;
@@ -1970,8 +1972,146 @@ body .contact-section .forminator-custom-form .forminator-button.forminator-butt
 }
 
 /* ============================================================
-   SINGOLO EVENTO
+   USP BAR — Editoriale magazine
+   Mobile: 2 colonne | Desktop: 4 colonne
    ============================================================ */
+
+.usp-bar {
+    background: var(--colore-sfondo-scuro);
+    padding: var(--spazio-l) var(--padding-laterale);
+    position: relative;
+    z-index: 21;
+    border-top: 1px solid rgba(226, 221, 214, 0.08);
+    border-bottom: 1px solid rgba(226, 221, 214, 0.08);
+}
+
+.usp-bar-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spazio-m);
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0;
+}
+
+.usp-bar-item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spazio-s);
+    padding: var(--spazio-m) 0;
+}
+
+/* Riga icona + stat */
+.usp-bar-top {
+    display: flex;
+    align-items: center;
+    gap: var(--spazio-s);
+}
+
+.usp-bar-icon {
+    color: var(--colore-accento);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+}
+
+.usp-bar-icon svg {
+    width: 28px;
+    height: 28px;
+    display: block;
+}
+
+/* Numero/stat tipografico grande */
+.usp-bar-stat {
+    font-family: var(--font-titoli);
+    font-size: var(--testo-h2);
+    font-weight: 700;
+    line-height: 1;
+    color: var(--colore-bordo);
+    letter-spacing: -0.02em;
+}
+
+/* Testo */
+.usp-bar-body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spazio-xs);
+}
+
+#usp-title {
+    color: var(--colore-testo-chiaro);
+    padding: 0 var(--padding-laterale);
+    max-width: var(--container-width);
+    margin: 0 auto;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.usp-bar-label {
+    font-family: var(--font-corpo);
+    font-size: var(--testo-sm);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--colore-testo-chiaro);
+    line-height: var(--interlinea-stretta);
+}
+
+.usp-bar-desc {
+    font-family: var(--font-corpo);
+    font-size: var(--testo-xs);
+    color: var(--colore-testo-muted);
+    line-height: var(--interlinea-base);
+    margin: 0;
+    letter-spacing: 0.04em;
+}
+
+/* Desktop 768px+: 4 colonne con separatori */
+@media (min-width: 768px) {
+    .usp-bar-list {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0;
+    }
+
+    .usp-bar-item {
+        padding: var(--spazio-m) var(--spazio-l) var(--spazio-m) var(--spazio-m);
+        border-right: 1px solid rgba(226, 221, 214, 0.12);
+    }
+
+    .usp-bar-item:first-child {
+        padding-left: var(--spazio-s);
+    }
+
+    .usp-bar-item:last-child {
+        border-right: none;
+        padding-right: 0;
+    }
+
+    .usp-bar-icon svg {
+        width: 32px;
+        height: 32px;
+    }
+
+    .usp-bar-stat {
+        font-size: var(--testo-h1);
+    }
+}
+
+/* Large Desktop 1290px+ */
+@media (min-width: 1290px) {
+    .usp-bar {
+        padding: var(--spazio-l) 0;
+    }
+
+    #usp-title {
+        text-align: left;
+    }
+}
+
+/* ============================================================
+    SINGOLO EVENTO
+    ============================================================ */
 
 .single-evento-page {
     background: var(--colore-sfondo);

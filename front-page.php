@@ -89,7 +89,7 @@ get_header();
                     </button>
                 <?php endif; ?>
 
-                <div class="hero-cta" data-usal="fade-u duration-950 once delay-600">
+                <div class="hero-cta">
                     <a
                         href="<?php echo esc_url($hero_cta_link); ?>"
                         class="btn btn-light"
@@ -126,16 +126,16 @@ get_header();
     <div class="ticker-track">
         <span class="ticker-item">✦ 10% SUL PRIMO ACQUISTO</span>
         <span class="ticker-separator">—</span>
-        <span class="ticker-item">✦ SPEDIZIONE GRATUITA SOPRA 80€</span>
+        <span class="ticker-item">✦ SPEDIZIONE GRATUITA SOPRA 100€</span>
         <span class="ticker-separator">—</span>
         <span class="ticker-item">✦ NUOVA COLLEZIONE DISPONIBILE</span>
         <span class="ticker-separator">—</span>
         <span class="ticker-item">✦ 10% SUL PRIMO ACQUISTO</span>
         <span class="ticker-separator">—</span>
-        <span class="ticker-item">✦ SPEDIZIONE GRATUITA SOPRA 80€</span>
+        <span class="ticker-item">✦ SPEDIZIONE GRATUITA SOPRA 100€</span>
         <span class="ticker-separator">—</span>
         <span class="ticker-item">✦ NUOVA COLLEZIONE DISPONIBILE</span>
-        <span class="ticker-separator">—</span>
+        <span class="ticker-separator">—</span> 
     </div>
 </div>
 
@@ -169,6 +169,8 @@ $collections = [
 $secondary = ($featured === 'pe') ? 'ai' : 'pe';
 ?>
 
+<?php get_template_part('template-parts/usp-bar'); ?>
+
 <section class="collections-grid" data-usal="fade-l duration-1450 once threshold-10">
     <div class="collections-wrapper">
         <?php foreach ([$secondary => 'small', $featured => 'large'] as $key => $size):
@@ -188,6 +190,8 @@ $secondary = ($featured === 'pe') ? 'ai' : 'pe';
         <?php endforeach; ?>
     </div>
 </section>
+
+
 
 <section class="curated-selection-section" data-usal="fade-u duration-1000 once threshold-10">
     <header class="curated-header">
