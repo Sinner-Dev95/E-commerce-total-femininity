@@ -4,6 +4,18 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+/**
+ * Cache busting per asset locali — usa filemtime del file specifico.
+ * Se il file non esiste, fallback alla versione tema.
+ */
+function tf_asset_version($relative_path) {
+    $path = get_stylesheet_directory() . $relative_path;
+    if (file_exists($path)) {
+        return wp_get_theme()->get('Version') . '.' . filemtime($path);
+    }
+    return wp_get_theme()->get('Version');
+}
+
 // Carica Google Fonts in modo asincrono (performance optimization)
 add_action('wp_head', 'blocksy_child_async_fonts', 1);
 function blocksy_child_async_fonts() {
@@ -38,26 +50,32 @@ function blocksy_child_enqueue_styles()
         true // carica nel footer — USAL si auto-inizializza, non serve nell'<head>
     );
 
-    // Versione dinamica per cache busting (usa timestamp file)
-    $theme_version = wp_get_theme()->get('Version') . '.' . filemtime( get_stylesheet_directory() . '/assets/home-page.css' );
-
     // Carica il design system
     wp_enqueue_style(
         'blocksy-child-design-system',
         get_stylesheet_directory_uri() . '/assets/design-system.css',
         array('parent-style'),
-        $theme_version
+        tf_asset_version('/assets/design-system.css')
     );
 
     // Carica CSS specifico per homepage (solo in homepage)
-    if (is_front_page() || is_home() || is_post_type_archive( 'evento' ) || is_singular( 'evento' )) {
+    if (is_front_page() || is_home()) {
         wp_enqueue_style(
             'blocksy-child-home-page',
             get_stylesheet_directory_uri() . '/assets/home-page.css',
             array('blocksy-child-design-system'),
-            $theme_version
+            tf_asset_version('/assets/home-page.css')
         );
-   
+    }
+
+    // Carica CSS specifico per pagine evento (archivio + singolo)
+    if (is_post_type_archive('evento') || is_singular('evento')) {
+        wp_enqueue_style(
+            'blocksy-child-evento',
+            get_stylesheet_directory_uri() . '/assets/evento.css',
+            array('blocksy-child-design-system'),
+            tf_asset_version('/assets/evento.css')
+        );
     }
 
     // Carica override WooCommerce (solo se WooCommerce è attivo)
@@ -66,7 +84,7 @@ function blocksy_child_enqueue_styles()
             'blocksy-child-woocommerce',
             get_stylesheet_directory_uri() . '/assets/woo-commerce-layout.css',
             array('blocksy-child-design-system'),
-            $theme_version
+            tf_asset_version('/assets/woo-commerce-layout.css')
         );
     }
 
@@ -89,7 +107,7 @@ function blocksy_child_enqueue_styles()
         'blocksy_child_main',
         get_stylesheet_directory_uri() . '/scripts/main.js',
         array(),
-        $theme_version,
+        tf_asset_version('/scripts/main.js'),
         true // Carica nel footer
     );
 
@@ -98,7 +116,7 @@ function blocksy_child_enqueue_styles()
         'blocksy-child-animation',
         get_stylesheet_directory_uri() . '/assets/animation.css',
         array('blocksy-child-design-system'),
-        $theme_version
+        tf_asset_version('/assets/animation.css')
     );
 
     // Carica JavaScript per animazioni (dipende da Lenis)
@@ -106,7 +124,7 @@ function blocksy_child_enqueue_styles()
         'blocksy-child-animation',
         get_stylesheet_directory_uri() . '/scripts/animation.js',
         array('lenis-smooth-scroll', 'usal-js'),
-        $theme_version,
+        tf_asset_version('/scripts/animation.js'),
         true
     );
 

@@ -33,7 +33,6 @@
     animation: heroFadeUp 0.8s ease-out 0.7s forwards;
 }
 
-.cta-button,
 .hero-cta {
     opacity: 0;
     animation: heroFadeUp 0.8s ease-out 1.0s forwards;
@@ -43,7 +42,6 @@
 @media (prefers-reduced-motion: reduce) {
     .hero-line-1,
     .hero-line-2,
-    .cta-button,
     .hero-cta {
         animation: none;
         opacity: 1;
@@ -58,7 +56,6 @@
     .hero-line-2 {
         animation: heroFadeUp 0.5s ease-out 0.2s forwards;
     }
-    .cta-button,
     .hero-cta {
         animation: heroFadeUp 0.5s ease-out 0.3s forwards;
     }

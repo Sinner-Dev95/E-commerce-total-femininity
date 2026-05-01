@@ -19,11 +19,10 @@ total-femininity/
 │
 ├── assets/
 │   ├── design-system.css              # Token: colori, font, spazi, componenti base (.btn)
-│   ├── home-page.css                  # Homepage: hero, collections, about, testimonials, contact, eventi, USP
-│   ├── hero-payoff.css                # Payoff section (se usato)
+│   ├── home-page.css                  # Homepage: hero, payoff, collections, about, testimonials, contact, eventi, USP
+│   ├── evento.css                     # Archivio + singolo evento (card, paginazione, hero)
 │   ├── animation.css                  # Animazioni CSS
-│   ├── woo-commerce-layout.css        # Override WooCommerce
-│   └── blocksy-child-*.min.css        # Build minificati
+│   └── woo-commerce-layout.css        # Override WooCommerce
 │
 ├── scripts/
 │   ├── main.js                        # JS principale
@@ -31,8 +30,7 @@ total-femininity/
 │
 ├── inc/
 │   ├── cpt-evento.php                 # Custom Post Type Evento
-│   ├── customizer.php                 # WordPress Customizer
-│   └── hero-payoff.php                # Hero/Payoff logic
+│   └── customizer.php                 # WordPress Customizer
 │
 ├── template-parts/
 │   ├── banner-evento.php              # Banner evento (homepage)

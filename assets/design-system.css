@@ -50,13 +50,18 @@
     --font-corpo: 'Syne', sans-serif;
     --font-script: 'Pacifico', cursive;
 
-    --testo-xs:   0.75rem;                          /* 12px  - fisso */
-    --testo-sm:   0.875rem;                         /* 14px  - fisso */
-    --testo-base: clamp(1rem, 2vw, 1.125rem);       /* 16→18px */
-    --testo-md:   clamp(1.125rem, 2.5vw, 1.375rem); /* 18→22px */
-    --testo-lg:   clamp(1.375rem, 3vw, 1.75rem);    /* 22→28px */
-   --testo-h1:   clamp(2.75rem, 8vw, 5.61rem);
---testo-h2:   clamp(2rem, 4.5vw, 2.75rem);
+    --testo-xs:   0.75rem;                                        /* 12px - fisso */
+    --testo-sm:   0.875rem;                                       /* 14px - fisso */
+    --testo-base: clamp(0.9375rem, 0.25vw + 0.875rem, 1.0625rem); /* 15→17px - corpo testo */
+    --testo-md:   clamp(1rem, 0.45vw + 0.95rem, 1.1875rem);       /* 16→19px - sottotitoli, intro */
+    --testo-lg:   clamp(1.1875rem, 1.5vw + 1rem, 1.5625rem);      /* 19→25px - H3, titoli card */
+    --testo-h2:   clamp(1.875rem, 2vw + 1.25rem, 3rem);           /* 30→48px - titoli sezione */
+    --testo-h1:   clamp(2.75rem, 5.5vw, 5.25rem);                 /* 44→84px - hero headline */
+
+    /* Script & Display — Pacifico e numeri grandi */
+    --testo-script-lg: clamp(2.75rem, 4.8vw, 4.5rem);  /* Payoff grande, accent editoriale */
+    --testo-script-md: clamp(2.25rem, 3.5vw, 3.5rem);  /* Payoff compatto, signature */
+    --testo-stat: clamp(2rem, 3vw, 3.75rem);            /* Numeri, counter, stats */
 
     /* Line Height */
     --interlinea-stretta: 1.2;   /* Titoli display */
@@ -64,20 +69,39 @@
     --interlinea-base:    1.6;   /* Corpo testo */
 
     /* --- 3. SPAZIATURE (Rhythm & Flow) --- */
-    /* Basato su griglia 4px/8px */
+    /* Micro e componenti — fissi */
     --spazio-xs: 0.5rem;                /* 8px  (Micro) */
     --spazio-s: 1rem;                   /* 16px (Interno componenti) */
     --spazio-m: 2rem;                   /* 32px (Separazione standard) */
-    --spazio-l: 4rem;                   /* 64px (Separazione macro) */
-    --spazio-xl: 6rem;                  /* 96px (Separazione extra-large) */
-    --spazio-xxl: 8rem;                 /* 128px (Separazione XXL) */
-    
-    /* Spaziatura Sezioni Fluida */
-    --spazio-sezione: clamp(4rem, 10vw, 8rem); /* Da 64px a 128px */
-    --container-width: 1290px;          /* Max width per schermi grandi */
-    --padding-laterale: clamp(1.25rem, 5vw, 3rem); /* Safe area */
 
-    /* --- 4. COMPONENTI UI (Brutalism) --- */
+    /* Macro — fluidi con clamp() */
+    --spazio-l: clamp(2rem, 5vw, 4rem);           /* 32→64px - separazione macro */
+    --spazio-xl: clamp(3rem, 7vw, 6rem);          /* 48→96px - extra-large */
+    --spazio-xxl: clamp(4rem, 9vw, 8rem);         /* 64→128px - XXL */
+
+    /* Sezioni */
+    --spazio-sezione: clamp(4rem, 10vw, 8rem);    /* 64→128px - default */
+    --spazio-sezione-tight: clamp(2.25rem, 5svh, 5rem);  /* Compatto - banner, ticker */
+    --spazio-sezione-loose: clamp(4rem, 9svh, 8rem);     /* Generoso - hero, about */
+
+    /* Gap interni */
+    --spazio-gap-contenuto: clamp(1.25rem, 2.5vw, 2.5rem); /* Tra titolo e contenuto */
+    --spazio-gap-item: clamp(0.75rem, 1.5vw, 1.5rem);      /* Tra item in grid */
+
+    /* --- 4. ALTEZZE VIEWPORT --- */
+    --altezza-hero: clamp(32rem, 86svh, 52rem);          /* Hero full-height */
+    --altezza-hero-compact: clamp(28rem, 78svh, 42rem);  /* Hero schermi bassi */
+    --altezza-media: clamp(24rem, 68svh, 46rem);         /* Collections */
+    --altezza-editoriale: clamp(34rem, 78svh, 54rem);    /* About, sezioni editoriali */
+    --altezza-editoriale-compact: clamp(32rem, 70svh, 44rem); /* About schermi bassi */
+
+    /* --- 5. LAYOUT CONTAINER --- */
+    --container-width: 1290px;                            /* Max width default */
+    --container-width-sm: 900px;                          /* Sezioni strette (About) */
+    --container-width-md: 1120px;                         /* Sezioni medie (Testimonials) */
+    --padding-laterale: clamp(1.25rem, 5vw, 3rem);       /* Safe area laterale */
+
+    /* --- 6. COMPONENTI UI (Brutalism) --- */
     --raggio-bordo: 0px;                /* Sharp edges (Stile Crap Eyewear) */
     --bordo-sottile: 1px solid var(--colore-bordo);
     --bordo-spesso: 2px solid var(--colore-sfondo-scuro);
@@ -102,6 +126,27 @@ body {
     box-sizing: border-box;
     touch-action: manipulation;
 }
+/* Skip to content — accessibilità globale */
+.skip-link {
+    position: absolute;
+    top: -100px;
+    left: 10px;
+    background: #000000;
+    color: var(--colore-bordo);
+    padding: 12px 24px;
+    z-index: 99999;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+    transition: top 0.3s ease;
+}
+
+.skip-link:focus {
+    top: 10px;
+    outline: 3px solid var(--colore-bordo);
+    outline-offset: 2px;
+}
+
 /* HEADER FISSO/STICKY - attivo bianco */
 [data-header*=type-1] .ct-header [data-sticky*=yes] [data-row*=middle] .current-menu-item .ct-menu-link,
 [data-header*=type-1] .ct-header [data-sticky*=yes] [data-row*=middle] .current_page_item .ct-menu-link {
@@ -156,6 +201,7 @@ body {
     will-change: transform;
     position: relative;
     overflow: hidden;
+    isolation: isolate;
     z-index: 0;
 }
 
@@ -169,6 +215,49 @@ body {
         font-size: var(--testo-base);
         padding: 1rem 2.5rem;
     }
+}
+
+/* ============================================================
+   VARIANTI BOTTONI — Colori per contesto
+   ============================================================ */
+
+/* Su sfondo scuro — hero, banner, contact */
+.btn-light {
+    background: transparent;
+    color: var(--colore-bordo);
+    border-color: var(--colore-bordo);
+}
+
+.btn-light:hover {
+    background: transparent;
+    color: var(--colore-sfondo-scuro);
+    border-color: var(--colore-bordo);
+}
+
+/* Su sfondo scuro — accento verde */
+.btn-accent {
+    background: transparent;
+    color: var(--colore-accento);
+    border-color: var(--colore-accento);
+}
+
+.btn-accent:hover {
+    background: transparent;
+    color: var(--colore-sfondo-scuro);
+    border-color: var(--colore-accento);
+}
+
+/* Su sfondo chiaro — nero su crema */
+.btn-dark {
+    background: var(--colore-testo-principale);
+    color: var(--colore-sfondo-caldo);
+    border-color: var(--colore-testo-principale);
+}
+
+.btn-dark:hover {
+    background: var(--colore-testo-principale);
+    color: var(--colore-testo-principale);
+    border-color: var(--colore-accento);
 }
 
 /* ============================================================
@@ -202,7 +291,7 @@ body {
 /* Colore fill per variante */
 .btn-light::before  { background: var(--colore-bordo); }
 .btn-dark::before   { background: var(--colore-accento); }
-.btn-accent::before { background: var(--colore-bordo); }
+.btn-accent::before { background: var(--colore-accento); }
 
 /* Utility freccia opzionale — aggiunge nudge alla freccia in hover */
 .btn--arrow .btn__arrow {

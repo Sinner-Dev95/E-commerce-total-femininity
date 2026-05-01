@@ -264,7 +264,7 @@ function tf_customizer_register( $wp_customize ) {
 
     // --- About Title ---
     $wp_customize->add_setting( 'about_title', array(
-        'default'           => 'Oltre la moda.',
+        'default'           => 'Scelte da noi.',
         'sanitize_callback' => 'sanitize_text_field',
         'transport'         => 'refresh',
     ) );
@@ -278,7 +278,7 @@ function tf_customizer_register( $wp_customize ) {
 
     // --- About Text 1 ---
     $wp_customize->add_setting( 'about_text_1', array(
-        'default'           => 'Total Femininity nasce a Torino nel 2026 dalla passione condivisa di Tiziana e Federica — due sorelle con una visione precisa di cosa significa vestirsi da donna oggi. Non solo moda: ogni capo è una scelta consapevole, un modo di raccontare chi sei senza compromessi.',
+        'default'           => 'Total Femininity nasce dal gusto di Tiziana e Federica e da un modo semplice di lavorare: selezionare capi femminili attuali, curati e piacevoli da indossare.',
         'sanitize_callback' => 'sanitize_textarea_field',
         'transport'         => 'refresh',
     ) );
@@ -292,7 +292,7 @@ function tf_customizer_register( $wp_customize ) {
 
     // --- About Text 2 ---
     $wp_customize->add_setting( 'about_text_2', array(
-        'default'           => 'La nostra selezione di abbigliamento femminile è disponibile online e nel nostro showroom a Settimo Torinese, dove puoi toccare con mano la qualità e trovare il tuo stile con la nostra guida personale.',
+        'default'           => 'Ogni proposta viene scelta pensando a come veste, a come si abbina e a quanto può accompagnarti nella vita di tutti i giorni. Puoi acquistare online o venire nel nostro showroom a Settimo Torinese per provare con calma e ricevere un consiglio dal vivo.',
         'sanitize_callback' => 'sanitize_textarea_field',
         'transport'         => 'refresh',
     ) );

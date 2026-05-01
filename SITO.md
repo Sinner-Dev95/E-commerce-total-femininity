@@ -84,7 +84,7 @@ Ordine sezioni in `front-page.php`:
 
 | # | Sezione | Background | Template / CSS |
 |---|---------|------------|----------------|
-| 1 | **Hero** | Scuro + video | `hero-payoff.css` |
+| 1 | **Hero + Payoff** | Scuro + video | `home-page.css` |
 | 2 | **Editorial Ticker** | Scuro | `home-page.css` |
 | 3 | **Collections Grid** | Caldo | `home-page.css` |
 | 4 | **Curated Selection** | Caldo | `home-page.css` |
